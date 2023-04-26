@@ -6,10 +6,11 @@ public class Target : MonoBehaviour
 {
     public GameObject enemytoshoot;
     public GameObject bullet;
-    public float range = 30;
+    public float range = 5;
     // Start is called before the first frame update
     void Start()
     {
+        range = 5;
         StartCoroutine(Cour());
     }
 
@@ -28,7 +29,7 @@ public class Target : MonoBehaviour
         bul.GetComponent<Rigidbody2D>().velocity = (enemypos - turretpos) / (enemypos - turretpos).magnitude * 10;
         Vector2 dir = enemypos - turretpos;
         float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        bul.name = "NOOB";
+        bul.name = "Shot";
 
         gameObject.transform.Find("SpriteHolder").Find("TurretRot").rotation = Quaternion.Euler(0, 0, rot-90);
 
@@ -43,14 +44,14 @@ public class Target : MonoBehaviour
 
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy"))
             {
-                if ((enemy.transform.position - gameObject.transform.position).magnitude < pos && (enemy.transform.position - gameObject.transform.position).magnitude < range)
+                if ((enemy.transform.position - gameObject.transform.position).magnitude < pos && (enemy.transform.position - gameObject.transform.position).magnitude < range && gameObject.GetComponent<Collider2D>().enabled)
                 {
                     pos = (enemy.transform.position - gameObject.transform.position).magnitude;
                     enemytoshoot = enemy;
                 }
             }
 
-            if (enemytoshoot != null && (enemytoshoot.transform.position - gameObject.transform.position).magnitude < range)
+            if (enemytoshoot != null && (enemytoshoot.transform.position - gameObject.transform.position).magnitude < range && enemytoshoot.CompareTag("enemy"))
             {
                 spawnshot(enemytoshoot.transform.position);
             }

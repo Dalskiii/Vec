@@ -6,22 +6,23 @@ public class EnemySpawningScript : MonoBehaviour
 {
     public int randomside;
     public GameObject tile;
-    public int size = 100;
+    public int size;
     public Vector2 randompos;
     public GameObject enemy1;
     public MapSpawnerScript tileinfo;
     public float width;
+    public float difficulity;
+    public float speed;
     
 
     // Start is called before the first frame update
     void Start()
     {
+        difficulity = 10f;
+        speed = 2f;
+        size = 20;
         width = tile.GetComponent<SpriteRenderer>().bounds.extents.x;
-        spawnenemy();
-        spawnenemy();
-        spawnenemy();
-        spawnenemy();
-
+        StartCoroutine(cour());
     }
 
     // Update is called once per frame
@@ -55,10 +56,10 @@ public class EnemySpawningScript : MonoBehaviour
             print("noob");
         }
        
-        print(randompos*2);
+        
         GameObject enemy = Instantiate(enemy1, randompos*2, Quaternion.identity);
         
-        enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(-1*randompos.x/size*10, -1*randompos.y / size*10);
+        enemy.GetComponent<Rigidbody2D>().velocity = new Vector2(-1*randompos.x/size, -1*randompos.y / size)*speed;
         enemy.name = "bob";
         
         Vector2 v = enemy.GetComponent<Rigidbody2D>().velocity;
@@ -67,5 +68,19 @@ public class EnemySpawningScript : MonoBehaviour
 
 
     }
+    
+    IEnumerator cour()
+    {
+        while (true)
+        {
+            
+            yield return new WaitForSeconds(difficulity);
+            spawnenemy();
+
+
+        }
+        
+    }
+
 }
 

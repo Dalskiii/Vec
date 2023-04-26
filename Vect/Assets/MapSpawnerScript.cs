@@ -9,11 +9,12 @@ public class MapSpawnerScript : MonoBehaviour
     public GameObject tile;
     public float width;
     public GameObject camscript;
-    public int size = 100;
+    public int size;
     
     // Start is called before the first frame update
     void Start()
     {
+        size = 20;
         width = tile.GetComponent<SpriteRenderer>().bounds.extents.x;
         spawnTiles(size);
         camscript.GetComponent<CameraMovement>().startTileColor = tile.GetComponent<SpriteRenderer>().color;

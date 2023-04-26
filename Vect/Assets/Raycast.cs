@@ -48,7 +48,8 @@ public class Raycast : MonoBehaviour
         if (Input.GetMouseButton(0) && placeObj && !IsPointerOverUIObject() && hitObject.transform.childCount <= 0 && hitObject.transform.parent == null && hitObject.CompareTag("Tile"))
         {
             placeObj = false;
-            Turret.GetComponent<Collider2D>().enabled = true;
+            tempObject.GetComponent<Collider2D>().enabled = true;
+            print(Turret.GetComponent<Collider2D>().enabled);
             print("noob");
             tempObject.transform.parent = hitObject.transform;
         }
@@ -62,7 +63,8 @@ public class Raycast : MonoBehaviour
             placeObj = true;
             tempObject = Instantiate(Turret, hitObject.transform);
             SpriteHolder = tempObject.transform.Find("SpriteHolder").gameObject;
-            
+            tempObject.GetComponent<Collider2D>().enabled = false;
+
         }
         else
         {
