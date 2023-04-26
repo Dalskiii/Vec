@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Target : MonoBehaviour
+{
+    public GameObject enemytoshoot;
+    public GameObject bullet;
+    public float range = 30;
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(Cour());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void spawnshot(Vector2 enemypos)
+    {
+        float bounds = gameObject.transform.Find("SpriteHolder").GetComponent<SpriteRenderer>().bounds.extents.x;
+        Vector2 turretpos = gameObject.transform.position;
+
+        GameObject bul = Instantiate(bullet, turretpos, Quaternion.identity);
+        bul.GetComponent<Rigidbody2D>().velocity = (enemypos - turretpos) / (enemypos - turretpos).magnitude * 10;
+        Vector2 dir = enemypos - turretpos;
+        float rot = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        bul.name = "NOOB";
+
+        gameObject.transform.Find("SpriteHolder").Find("TurretRot").rotation = Quaternion.Euler(0, 0, rot-90);
+
+    }
+
+    IEnumerator Cour()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(3);
+            float pos = Mathf.Infinity;
+
+            foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy"))
+            {
+                if ((enemy.transform.position - gameObject.transform.position).magnitude < pos && (enemy.transform.position - gameObject.transform.position).magnitude < range)
+                {
+                    pos = (enemy.transform.position - gameObject.transform.position).magnitude;
+                    enemytoshoot = enemy;
+                }
+            }
+
+            if (enemytoshoot != null && (enemytoshoot.transform.position - gameObject.transform.position).magnitude < range)
+            {
+                spawnshot(enemytoshoot.transform.position);
+            }
+
+        }
+
+    }
+}
