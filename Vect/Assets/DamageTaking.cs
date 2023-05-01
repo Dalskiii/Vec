@@ -52,7 +52,7 @@ public class DamageTaking : MonoBehaviour
         {
             Destroy(gameObject);
             script.addgold(50);
-            print("60ad");
+            
         }
     }
     

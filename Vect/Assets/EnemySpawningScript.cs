@@ -34,7 +34,7 @@ public class EnemySpawningScript : MonoBehaviour
     public void spawnenemy()
     {
         randomside = Random.Range(1, 5);
-        print(randomside);
+        
         if (randomside == 1)
         {
             randompos = new Vector2(1 * width * size, Random.Range(width * size, -width * size));

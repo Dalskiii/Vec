@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapSpawnerScript : MonoBehaviour
 {
+    public Sprite newsprite;
     public GameObject Corner;
     public GameObject NotCorner;
     public GameObject tile;
     public float width;
     public GameObject camscript;
     public int size;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class MapSpawnerScript : MonoBehaviour
             camscript.GetComponent<CameraMovement>().tiles.Add(Obj);
         }
         basespawn();
+        spawnRescources(size);
     }
 
     // Update is called once per frame
@@ -92,6 +96,28 @@ public class MapSpawnerScript : MonoBehaviour
             GameObject efef = Instantiate(Corner, GameObject.Find(cord).transform);
             efef.GetComponent<SpriteRenderer>().sortingOrder = 1;
             efef.transform.position = efef.transform.parent.position;
+        }
+    }
+
+    public void spawnRescources(int mapsize)
+    {
+        print(mapsize);
+        for(float  i = -mapsize+1; i < mapsize; i++) { 
+            for(float j = -mapsize+1; j < mapsize; j++)
+            {
+                print(mapsize);
+                print(Mathf.PerlinNoise(Random.Range(i + i / 5, i - i / 5), Random.Range(j + j / 5, j - j / 5)));
+                if (Mathf.PerlinNoise(Random.Range(i + (i/8), i - (i/8)), Random.Range(j + (j/8), j - (j/8))) < 0.4f)
+                {
+                    print(i.ToString() + "," + j.ToString());
+                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().size = new Vector2(1f, 1f);
+                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().color = new Color(255, 215, 0);
+                    
+
+                }
+            }
+
         }
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3780201604566011221}
   - component: {fileID: 7270281858105182104}
-  - component: {fileID: 3029038013629267866}
   - component: {fileID: 3730453995396040423}
   m_Layer: 6
   m_Name: Tile
@@ -86,19 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3029038013629267866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2454363045994361522}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1085b84d3b4154641bb6d52acab1617c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Occupied: 0
 --- !u!61 &3730453995396040423
 BoxCollider2D:
   m_ObjectHideFlags: 0
