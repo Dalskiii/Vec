@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class DamageTaking : MonoBehaviour
 {
+    public RescourceScript script;
 
     public int hp;
     // Start is called before the first frame update
     void Start()
     {
-        hp = 200;
+        script = GameObject.Find("RescourceManagement").GetComponent<RescourceScript>();
+        hp = 20;
     }
 
     // Update is called once per frame
@@ -36,13 +38,10 @@ public class DamageTaking : MonoBehaviour
 
         if(collision.gameObject.GetComponent<hp>() != null)
         {
-            print("intercepted");
+           
             int oldhp = collision.gameObject.GetComponent<hp>().hitpoints;
             collision.gameObject.GetComponent<hp>().hitpoints -= hp;
             hp -= oldhp;
-            print(hp);
-            print(collision.gameObject.GetComponent<hp>().hitpoints);
-
             if (collision.gameObject.GetComponent<hp>().hitpoints <= 0)
             {
                 Destroy(collision.gameObject);
@@ -52,6 +51,8 @@ public class DamageTaking : MonoBehaviour
         if(hp <= 0)
         {
             Destroy(gameObject);
+            script.addgold(50);
+            print("60ad");
         }
     }
     

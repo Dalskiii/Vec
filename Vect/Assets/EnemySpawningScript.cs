@@ -18,7 +18,7 @@ public class EnemySpawningScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        difficulity = 10f;
+        difficulity = 5f;
         speed = 2f;
         size = 20;
         width = tile.GetComponent<SpriteRenderer>().bounds.extents.x;

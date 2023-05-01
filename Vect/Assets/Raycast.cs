@@ -13,7 +13,7 @@ public class Raycast : MonoBehaviour
     public GameObject Eventsystem;
     Collider2D hit;
     GameObject hitObject;
-    
+    public RescourceScript rescourceScript;
     public Vector3 mousePos;
     public Camera cam;
     public GameObject tempObject;
@@ -21,7 +21,7 @@ public class Raycast : MonoBehaviour
 
     void Start()
     {
-        
+        rescourceScript = GameObject.Find("RescourceManagement").GetComponent<RescourceScript>();
     }
 
     // Update is called once per frame
@@ -45,13 +45,14 @@ public class Raycast : MonoBehaviour
 
 
 
-        if (Input.GetMouseButton(0) && placeObj && !IsPointerOverUIObject() && hitObject.transform.childCount <= 0 && hitObject.transform.parent == null && hitObject.CompareTag("Tile"))
+        if (Input.GetMouseButton(0) && placeObj && !IsPointerOverUIObject() && hitObject.transform.childCount <= 0 && hitObject.transform.parent == null && hitObject.CompareTag("Tile") && rescourceScript.gold >= 100)
         {
             placeObj = false;
             tempObject.GetComponent<Collider2D>().enabled = true;
-            print(Turret.GetComponent<Collider2D>().enabled);
-            print("noob");
+            rescourceScript.addgold(-100);
+
             tempObject.transform.parent = hitObject.transform;
+
         }
         
     }

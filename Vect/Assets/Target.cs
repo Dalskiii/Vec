@@ -39,7 +39,7 @@ public class Target : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(3);
+            
             float pos = Mathf.Infinity;
 
             foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("enemy"))
@@ -48,13 +48,17 @@ public class Target : MonoBehaviour
                 {
                     pos = (enemy.transform.position - gameObject.transform.position).magnitude;
                     enemytoshoot = enemy;
+                    print("spotted");
                 }
             }
 
             if (enemytoshoot != null && (enemytoshoot.transform.position - gameObject.transform.position).magnitude < range && enemytoshoot.CompareTag("enemy"))
             {
                 spawnshot(enemytoshoot.transform.position);
+                yield return new WaitForSeconds(0.5f);
             }
+
+            yield return new WaitForSeconds(0.1f);
 
         }
 
