@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class MapSpawnerScript : MonoBehaviour
 {
@@ -12,12 +13,19 @@ public class MapSpawnerScript : MonoBehaviour
     public float width;
     public GameObject camscript;
     public int size;
-    
-    
+    public float seed;
+    public float scale;
+    public float lessthan;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        size = 20;
+        lessthan = 0.3f;
+        scale = 0.1f;
+        Random.Range(0, 100000);
+        size = 100;
         width = tile.GetComponent<SpriteRenderer>().bounds.extents.x;
         spawnTiles(size);
         camscript.GetComponent<CameraMovement>().startTileColor = tile.GetComponent<SpriteRenderer>().color;
@@ -105,15 +113,62 @@ public class MapSpawnerScript : MonoBehaviour
         for(float  i = -mapsize+1; i < mapsize; i++) { 
             for(float j = -mapsize+1; j < mapsize; j++)
             {
-                print(mapsize);
-                print(Mathf.PerlinNoise(Random.Range(i + i / 5, i - i / 5), Random.Range(j + j / 5, j - j / 5)));
-                if (Mathf.PerlinNoise(Random.Range(i + (i/8), i - (i/8)), Random.Range(j + (j/8), j - (j/8))) < 0.4f)
+                float randomi = Random.Range(-i, i)/20;
+                float randomj = Random.Range(-j, j)/20;
+                print(Mathf.PerlinNoise(i / size, j / size));
+
+                if(i < 0 && j < 0)
                 {
-                    print(i.ToString() + "," + j.ToString());
-                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
-                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().size = new Vector2(1f, 1f);
-                    GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().color = new Color(255, 215, 0);
-                    
+                    if (Mathf.PerlinNoise(i * scale, j * scale) < lessthan)
+                    {
+
+                        GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+
+
+                    }
+                }
+                else if (i<0 && j > 0)
+                {
+                    if (Mathf.PerlinNoise(i * scale+1000, j * scale+1000) < lessthan)
+                    {
+
+                        GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+
+
+                    }
+
+                }
+                else if (i > 0 && j > 0)
+                {
+                    if (Mathf.PerlinNoise(i * scale+100000, j * scale + 100000) < lessthan)
+                    {
+
+                        GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+
+
+                    }
+
+                }
+                else if (i > 0 && j < 0)
+                {
+                    if (Mathf.PerlinNoise(i * scale+10000, j * scale+10000) < lessthan)
+                    {
+
+                        GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+
+
+                    }
+
+                }
+                else
+                {
+                    if (Mathf.PerlinNoise(i * scale + 100, j * scale + 100) < lessthan)
+                    {
+
+                        GameObject.Find(i.ToString() + "," + j.ToString()).GetComponent<SpriteRenderer>().sprite = newsprite;
+
+
+                    }
 
                 }
             }

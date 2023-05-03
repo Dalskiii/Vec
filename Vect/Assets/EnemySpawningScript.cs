@@ -20,7 +20,7 @@ public class EnemySpawningScript : MonoBehaviour
     {
         difficulity = 5f;
         speed = 2f;
-        size = 20;
+        size = 100;
         width = tile.GetComponent<SpriteRenderer>().bounds.extents.x;
         StartCoroutine(cour());
     }

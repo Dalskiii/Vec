@@ -901,12 +901,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cb4ad8aaa138a42ba779a2b0f47d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  newsprite: {fileID: 21300000, guid: f85f028e33bd58c4cb6a650a4c611e97, type: 3}
   Corner: {fileID: 1955739723700991664, guid: bb31a495c488e8343af35137ab8a4447, type: 3}
   NotCorner: {fileID: 2601793020666956846, guid: 0f7279826f6652848974a8fec319c033, type: 3}
   tile: {fileID: 2454363045994361522, guid: 056a9ee8b1ba5d94288a12eb411e4dcd, type: 3}
   width: 0
   camscript: {fileID: 1362872511}
   size: 100
+  seed: 0
+  scale: 0
+  lessthan: 0
 --- !u!4 &2145129843
 Transform:
   m_ObjectHideFlags: 0
